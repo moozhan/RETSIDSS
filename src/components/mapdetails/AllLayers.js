@@ -6,11 +6,8 @@ import { MapContainer, MapConsumer, TileLayer, LayersControl, FeatureGroup, Laye
 import MapDraw from "./MapDraw";
 import Layout from '../layout/Layout';
 import { layerGroup } from 'leaflet';
-<<<<<<< Updated upstream
-=======
-
+import LayergeoPolygon from './LayergeoPolygon';
 import MiddleLayer from './MiddleLayer'
->>>>>>> Stashed changes
 
 function MapDataLoad(){
     const [priorities, setPriorities] = useContext(priorityStateContext);
@@ -39,12 +36,6 @@ function MapDataLoad(){
         } 
         tempString = tempString + modifiedNames[i];
 
-<<<<<<< Updated upstream
-
-        let urlwithLAs = 'https://cleanstreetserver.herokuapp.com/v1/point/GBLayer/' + tempString;        
-        //let urltest = urlwithLAs + '/'+ priorities[0];
-        //console.log(urltest);
-=======
         //tempString
         //apiLink
 
@@ -52,14 +43,10 @@ function MapDataLoad(){
         let urlwithLAs = 'https://cleanstreetserver.herokuapp.com/v1/point/GBLayer/' + tempString;        
         var apiLink = 'https://cleanstreetserver.herokuapp.com/v1/';
 
->>>>>>> Stashed changes
         setIsLoading(true);
         var allDatasets = [];
         var count = 0;
         for ( var j=0; j < priorities.length; j++) {
-<<<<<<< Updated upstream
-            const url = urlwithLAs +"/" + priorities[j];
-=======
             console.log(priorities[j]);
             let type;
             var temp = "";
@@ -75,7 +62,6 @@ function MapDataLoad(){
             const url = temp;
 
             //do not remove!
->>>>>>> Stashed changes
             let x = j;
             
             fetch(
@@ -89,10 +75,7 @@ function MapDataLoad(){
                 console.log(priorities[x]);
                 data["name"] = priorities[x];
                 data["id"] = x;
-<<<<<<< Updated upstream
-=======
                 data["type"] = type;
->>>>>>> Stashed changes
                 allDatasets.push(data);
                 console.log("Count: " + count);
                 if (count + 1 == priorities.length){
@@ -103,26 +86,10 @@ function MapDataLoad(){
                 
             });
         }
-<<<<<<< Updated upstream
-        // var c = 0;
-        // allDatasets.map(dataset => {
-        //     dataset["name"] = "Moozhan";
-        //     c++;
-        //     return dataset;
-        // });
-
-        
-            
-        //const indexed = allDatasets.map((item, id) => Object.assign(item, {id}));
-        setcalledDatasets(allDatasets);
-        console.log(allDatasets.length);
-        console.log(allDatasets);
-=======
        
         setcalledDatasets(allDatasets);
         // console.log(allDatasets.length);
         // console.log(allDatasets);
->>>>>>> Stashed changes
         
 
         
@@ -157,25 +124,13 @@ function MapDataLoad(){
     return (
         <LayersControl position= "topright">
             <LayerGroup>
-<<<<<<< Updated upstream
-            {calledDatasets.map(dataset => (  
-                <LayergeoMarker key = {dataset.name} dataName={dataset.name} mapdata={dataset[0][1]}/> 
-                // <LayerGroup key = {dataset.name}  position="topright" name = {dataset.name}>
-                    
-                // </LayerGroup>
-=======
             {calledDatasets.map(dataset => ( 
-                <MiddleLayer key = {dataset.name} data = {dataset}/>
->>>>>>> Stashed changes
+                <LayergeoPolygon key = {dataset.name} data = {dataset}/>
             ))}
             
             </LayerGroup>
             <LayerGroup>
-<<<<<<< Updated upstream
-                <MapDraw data = {calledDatasets[0][0][1]} />
-=======
                 <MapDraw data = {calledDatasets} />
->>>>>>> Stashed changes
             </LayerGroup>
             
             

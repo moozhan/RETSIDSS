@@ -1,39 +1,35 @@
 import React, {useState, useContext} from 'react';
-import {typeofChargerStateContext} from '../../Store';
+import {typeofChargerStateContext, selectedMarkerStateContext} from '../../Store';
+import '../../pages/main.css';
 
 
 const Form = () => {
         const [chargerType, setchargerType] = useContext(typeofChargerStateContext);
+        const [selectedMarker, setselectedMarker] = useContext(selectedMarkerStateContext);
+        
         const [checkedbox, setcheckedbox] = useState('fast charger');
-        console.log(checkedbox);
 
         const handleChange = (event) => {
-            setcheckedbox(event.target.value)
+            setcheckedbox(event.target.value);
+            setselectedMarker(event.target.value);
         }
-    
-        const resetRadioState = () => {
-            setcheckedbox('');
-        }
+
+
     return(
             <form>
             {chargerType.map(items => (
-            <div>
+            <div key = {items}>
                 <input
                 type="radio"
                 value={items}
                 checked={checkedbox === {items}}
                 onChange={handleChange}
-                /> {items}
+                /> 
+                <label>{items}</label>
             </div>
             ))}
-            <div>
-                <button
-                type="reset"
-                onClick={resetRadioState}
-                />
-            </div>
             </form> 
-
         )
+
     }
   export default Form;

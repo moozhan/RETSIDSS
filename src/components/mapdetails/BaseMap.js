@@ -9,7 +9,7 @@ function Map() {
   return (
     <>
       <MapContainer 
-        center={[54.975340, -1.612828]} 
+        center={[52.473351, 6.667982]} 
         zoom={6.5} 
         scrollWheelZoom={true}
         style={{ height: "70vh"}}

@@ -57,9 +57,29 @@ const Priorities = () => {
       label: "durhamCarParks"
     },
     {
-      name: "check-box-4",
-      key: "checkBox4",
-      label: "Check Box 4"
+      name: "BlueBadge",
+      key: "BlueBadge",
+      label: "BlueBadge"
+    },
+    {
+      name: "cityPopExports",
+      key: "cityPopExports",
+      label: "cityPopExports"
+    },
+    {
+      name: "HouseholdActivity",
+      key: "HouseholdActivity",
+      label: "HouseholdActivity"
+    },
+    {
+      name: "vehicleTypeJSON",
+      key: "vehicleTypeJSON",
+      label: "vehicleTypeJSON"
+    },
+    {
+      name: "walkingCyclingData",
+      key: "walkingCyclingData",
+      label: "walkingCyclingData"
     }
   ];
 

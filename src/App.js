@@ -1,10 +1,12 @@
 import { Route, Switch } from 'react-router-dom';
 import Main from './pages/Main';
 import Areas from './pages/Areas';
-import TypeofCharger from './pages/TypeofCharger';
+import TypeofInfrastructure from './pages/TypeofInfrastructure';
 import Priorities from './pages/Priorities';
 import Test from './pages/Test';
 import Location from './pages/Location';
+import TempLocation from './pages/TempLocation';
+import Configure from './pages/Configure';
 
 
 function App() {
@@ -16,8 +18,8 @@ function App() {
         <Route path='/areas'>
           <Areas />
         </Route>
-        <Route path='/typeofCharger'>
-          <TypeofCharger />
+        <Route path='/TypeofInfrastructure'>
+          <TypeofInfrastructure />
         </Route>
         <Route path='/priorities'>
           <Priorities />
@@ -27,6 +29,12 @@ function App() {
         </Route>
         <Route path='/location'>
           <Location />
+        </Route>
+        <Route path='/templocation'>
+          <TempLocation />
+        </Route>
+        <Route path='/configure'>
+          <Configure />
         </Route>
       </Switch>
   );

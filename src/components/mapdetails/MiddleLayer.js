@@ -9,9 +9,6 @@ function MiddleLayer(props) {
         )
         
     } else {
-        // console.log(dataset);
-        // console.log(dataset[0]);
-        // console.log(dataset[0][0]);
         return (
             <LayergeoPolygon key = {dataset.name} dataName={dataset.name} mapdata={dataset[0]}/> 
         )

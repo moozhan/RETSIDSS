@@ -1,19 +1,3 @@
-
-//     return(
-//         <LayersControl.Overlay name={props.dataName}>
-//         <FeatureGroup name="Marker with popup">
-//             {props.features && (
-//                 <GeoJSON data={props.data.features} 
-//                     style={props.style} 
-//                 />
-//             )}
-//         </FeatureGroup>
-//         </LayersControl.Overlay>
-//     );
-// }
-
-/////////////////////////
-
 import { feature } from '@turf/helpers';
 import React, {useContext, useState} from 'react';
 import { Marker, Popup, LayersControl, FeatureGroup, GeoJSON } from 'react-leaflet';
@@ -33,13 +17,13 @@ function Layergeo(props) {
     var data = props.mapdata;
     //console.log(data);
     var myFeatures = [];
-    LAs.forEach(la => {
-        data.forEach(feature => {
-            if (feature.properties.LAD13NM == la){
-                myFeatures.push(feature);
-            }
-        })
-    })
+    // LAs.forEach(la => {
+    //     data.forEach(feature => {
+    //         if (feature.properties.LAD13NM == la){
+    //             myFeatures.push(feature);
+    //         }
+    //     })
+    // })
     
 
 
