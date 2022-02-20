@@ -201,6 +201,21 @@ function TempLocation() {
     const _onDeleted = (e) => {
         const { layers: {_layers}} = e;
         Object.values(_layers).map(({_leaflet_id}) => {
+            settotalArea(0);
+            settotalEnergy(0);
+            settotalCarbon(0);
+            setTotalReedArea (0);
+            setTotalReedenergy (0);
+            setTotalReedCarbon(0);
+            setTotalCatArea (0);
+            setTotalCatenergy (0);
+            setTotalCatCarbon (0);
+            setTotalMaizArea (0);
+            setTotalMaizEnergy (0);
+            setTotalMaizCarbon (0);
+            setTotalMisEnergy(0);
+            setTotalMisArea (0);
+            setTotalMisCarbon (0);
             setMapLayers( layers => 
                 layers.filter( l => l.id !== _leaflet_id));
         });
