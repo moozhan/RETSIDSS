@@ -245,3 +245,30 @@ section .mainPage {
   margin-top: 1em;
   margin-left: 1em;
 }
+
+.Chartstyled {
+  background-color: white;
+  width: 450px;
+  height: 250px;
+  position: absolute;
+  margin-left: 70vw;
+  margin-top: -35vh;
+  z-index: 50000;
+}
+
+.StackedChartstyled {
+  background-color: white;
+  width: 450px;
+  height: 250px;
+  position: absolute;
+  margin-left: 1vw;
+  margin-top: -40vh;
+  z-index: 50000;
+}
+
+.bufferset {
+  margin-top: -3vh;
+  position: absolute;
+  z-index: 4000;
+  margin-left: 1vw;
+}
