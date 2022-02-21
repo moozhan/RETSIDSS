@@ -50,6 +50,7 @@ function TempLocation() {
     //console.log(turbinenergyValue);
 
     const [mapLayers, setMapLayers] = useState([]);
+    const [bufferLayers, setBufferLayers] = useState([]);
     const [totalMisArea, setTotalMisArea] = useState(0);
     const [totalMaizArea, setTotalMaizArea] = useState(0);
     const [totalCatArea, setTotalCatArea] = useState(0);
@@ -112,22 +113,22 @@ function TempLocation() {
                 {
                     enabled: true,
                     handler: new L.Draw.Polygon(map, {shapeOptions: Miscanthus}),
-                    title: 'Place restaurant marker',
+                    title: 'Plant Miscanthus',
                 },
                 {
                     enabled: true,
                     handler: new L.Draw.Polygon(map, {shapeOptions: Maize}),
-                    title: 'Place gas station marker'
+                    title: 'Plant Maize'
                 },
                 {
                     enabled: true,
                     handler: new L.Draw.Polygon(map, {shapeOptions: Cattail}),
-                    title: 'Place hospital marker'
+                    title: 'Plant Cattail'
                 },
                 {
                     enabled: true,
                     handler: new L.Draw.Polygon(map, {shapeOptions: Reed}),
-                    title: 'Place hospital marker'
+                    title: 'Plant Reed'
                 }
             ];
         }
