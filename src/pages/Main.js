@@ -201,24 +201,53 @@ function TempLocation() {
 
     const _onDeleted = (e) => {
         const { layers: {_layers}} = e;
-        Object.values(_layers).map(({_leaflet_id}) => {
-            settotalArea(0);
-            settotalEnergy(0);
-            settotalCarbon(0);
-            setTotalReedArea (0);
-            setTotalReedenergy (0);
-            setTotalReedCarbon(0);
-            setTotalCatArea (0);
-            setTotalCatenergy (0);
-            setTotalCatCarbon (0);
-            setTotalMaizArea (0);
-            setTotalMaizEnergy (0);
-            setTotalMaizCarbon (0);
-            setTotalMisEnergy(0);
-            setTotalMisArea (0);
-            setTotalMisCarbon (0);
+        Object.values(_layers).map((a) => {
+            var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
+            var color = a.options.fillColor;
+            if (color === "white") {
+                //var popup = layer.bindPopup(popupContent);
+                let energy = Math.round(246.15 * area/10000);
+                let carbon = Math.round(14.85 * area/10000);
+                setTotalMisEnergy(totalMisEnergy => totalMisEnergy - energy);
+                setTotalMisArea (totalMisArea => totalMisArea - area);
+                setTotalMisCarbon (totalMisCarbon => totalMisCarbon - carbon);
+                settotalEnergy (totalEnergy => totalEnergy - energy);
+                settotalCarbon (totalCarbon => totalCarbon - carbon);
+
+            } else if (color === "red") {
+                //var popup = layer.bindPopup(popupContent);
+                let energy = Math.round(520.38 * area/10000);
+                let carbon = Math.round(29.453 * area/10000);
+                setTotalMaizArea (totalMaizArea => totalMaizArea - area);
+                setTotalMaizEnergy (totalMaizEnergy => totalMaizEnergy - energy);
+                setTotalMaizCarbon (totalMaizCarbon => totalMaizCarbon - carbon);
+                settotalEnergy (totalEnergy => totalEnergy - energy);
+                settotalCarbon (totalCarbon => totalCarbon - carbon);
+
+            } else if (color === "blue") {
+                //var popup = layer.bindPopup(popupContent);
+                let energy = Math.round(128.32 * area/10000);
+                let carbon = Math.round(7.263 * area/10000);
+                setTotalCatArea (totalCatArea => totalCatArea - area);
+                setTotalCatenergy (totalCatEnergy => totalCatEnergy - energy);
+                setTotalCatCarbon (totalCatCarbon => totalCatCarbon - carbon);
+                settotalEnergy (totalEnergy => totalEnergy - energy);
+                settotalCarbon (totalCarbon => totalCarbon - carbon);
+
+            } else {
+                console.log("else");
+                //var popup = layer.bindPopup(popupContent);
+                let energy = Math.round(262.46 * area/10000);
+                let carbon = Math.round(14.855 * area/10000);
+                setTotalReedArea (totalReedArea => totalReedArea - area);
+                setTotalReedenergy (totalReedenergy => totalReedenergy - energy);
+                setTotalReedCarbon(totalReedCarbon => totalReedCarbon - carbon);
+                settotalEnergy (totalEnergy => totalEnergy - energy);
+                settotalCarbon (totalCarbon => totalCarbon - carbon);
+            }
+
             setMapLayers( layers => 
-                layers.filter( l => l.id !== _leaflet_id));
+                layers.filter( l => l.id !== a._leaflet_id));
         });
     };
 
@@ -276,7 +305,9 @@ function TempLocation() {
         console.log(checked);     
     }
     //=========================== Graph =========================//
-    
+    // function startdrawing(){
+    //     drawRef.current.leafletElement._toolbars.draw._modes.polygon.handler.enable();
+    // }
 
         
     
@@ -344,6 +375,7 @@ function TempLocation() {
             <input type="text" onChange={getInputValue}/>
             <button onClick ={updateBuffer}>Update the Buffer</button>
         </div>
+        {/* <button onClick ={startdrawing}>test</button> */}
         <pre className="text-left">{JSON.stringify(mapLayers, 0, 2)}</pre>
         </section>
     );
