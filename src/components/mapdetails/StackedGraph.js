@@ -51,7 +51,6 @@ useEffect(() => {
 }, [totalMisEnergy,totalMaizEnergy,totalCatEnergy,totalReedenergy, totalMisCarbon, totalMaizCarbon, totalCatCarbon, totalReedCarbon]);
 
     return ( 
-<section className="chart mb-4 mt-lg-5">
 <div className="StackedChartstyled">
 <Bar data={state}
     options= {{
@@ -66,11 +65,7 @@ useEffect(() => {
         legend: { position: 'bottom' },
     }}
  />
-
 </div>
-
-</section>
-
      );
 }
  

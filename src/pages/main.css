@@ -249,20 +249,18 @@ section .mainPage {
 .Chartstyled {
   background-color: white;
   width: 450px;
-  height: 250px;
-  position: absolute;
+  height: 200px;
   margin-left: 70vw;
-  margin-top: -35vh;
   z-index: 50000;
+  /* margin-top: 0.5em; */
 }
 
 .StackedChartstyled {
   background-color: white;
   width: 450px;
-  height: 250px;
-  position: absolute;
+  height: 200px;
   margin-left: 1vw;
-  margin-top: -40vh;
+  margin-top: -12em;
   z-index: 50000;
 }
 
@@ -271,4 +269,108 @@ section .mainPage {
   position: absolute;
   z-index: 4000;
   margin-left: 1vw;
+}
+
+.leaflet-draw-edit-edit {
+  display: none !important;
+}
+
+.leaflet-touch .leaflet-bar {
+  background-color: #fff;
+}
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-draw-polygon[title="Plant Miscanthus"] {
+  background: url("../components/images/Miscanthus.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.8);
+  width: 60px;
+  height: 80px;
+}
+
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-draw-polygon[title="Plant Maize"] {
+  background: url("../components/images/maze.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.8);
+  width: 60px;
+  height: 80px;
+}
+
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-draw-polygon[title="Plant Cattail"] {
+  background: url("../components/images/cattail.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.8);
+  width: 60px;
+  height: 80px;
+}
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-draw-polygon[title="Plant Reed"] {
+  background: url("../components/images/reed.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.8);
+  width: 60px;
+  height: 80px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
+  background: url("https://www.seekpng.com/png/detail/860-8608502_thin-recycle-bin-delete-garbage-full-comments-bin.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.6);
+  width: 60px;
+  height: 70px;
+}
+
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-edit-remove[title="No layers to delete"] {
+  background: url("https://www.seekpng.com/png/detail/860-8608502_thin-recycle-bin-delete-garbage-full-comments-bin.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.6);
+  width: 60px;
+  height: 70px;
+}
+
+.bufferset {
+  margin-top: -55vh;
+  margin-left: 0.8em;
+}
+
+.buffercreation {
+  width: 60px;
+  padding: 5px;
+  height: 50px;
+  background-color: white;
+  border: 1px solid rgb(150, 148, 148);
+}
+
+.buffervalues {
+  height: 30px;
+  display: none;
+}
+
+.chartholder {
+  width: 100%;
+  background-color: white;
+  opacity: 0.9;
+  z-index: 500000;
+  height: 220px;
+  position: absolute;
+  margin-top: -15em;
 }

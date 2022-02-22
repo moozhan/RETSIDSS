@@ -7,52 +7,62 @@ var Bargraph = ({totalMisArea,totalMaizArea,totalCatArea,totalReedArea}) => {
 
 const [state,setState] = useState({
 
-    labels:["Mis","Maize","Cattail", "Reed"],
+    labels:["Planted area"],
     datasets:[{
-
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data:[totalMisArea,totalMaizArea,totalCatArea,totalReedArea]
-
-    }]
+        label: 'Miscanthus',
+        backgroundColor: "#caf270",
+        data: [totalMisArea],
+      }, {
+        label: 'Maize',
+        backgroundColor: "#45c490",
+        data: [totalMaizArea],
+      }, {
+        label: 'Cattail',
+        backgroundColor: "#008d93",
+        data: [totalCatArea],
+      }, {
+        label: 'Reed',
+        backgroundColor: "#2e5468",
+        data: [totalReedArea]
+      }]
 })
 
 useEffect(() => {
     setState({
-        labels:["Mis","Maize","Cattail", "Reed"],
+        labels:["Planted area"],
         datasets:[{
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
-            data:[totalMisArea,totalMaizArea,totalCatArea,totalReedArea]
-    
-        }]
+            label: 'Miscanthus',
+            backgroundColor: "#caf270",
+            data: [totalMisArea],
+          }, {
+            label: 'Maize',
+            backgroundColor: "#45c490",
+            data: [totalMaizArea],
+          }, {
+            label: 'Cattail',
+            backgroundColor: "#008d93",
+            data: [totalCatArea],
+          }, {
+            label: 'Reed',
+            backgroundColor: "#2e5468",
+            data: [totalReedArea]
+          }]
     })
 
 }, [totalMisArea,totalMaizArea,totalCatArea,totalReedArea]);
 
     return ( 
-<section className="chart mb-4 mt-lg-5">
-
-<div className="Chartstyled">
-<Bar data={state}
-    options={{
-            title:{
-              display:true,
-              text:'Income , Expenses and Current Balance',
-              fontSize:20
-            },
-            legend:{
-              display:false,
-              position:'right'
-            }
-    }}
- />
-</div>
-
-</section>
-
+    <div className="Chartstyled">
+        <Bar data={state}
+            options={{
+                    title:{
+                    display:true,
+                    text:'Planted Area',
+                    fontSize:20
+                    }
+            }}
+        />
+    </div>
      );
 }
  

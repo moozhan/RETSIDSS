@@ -139,12 +139,13 @@ function TempLocation() {
         const {layerType, layer} = e;
         const{_leaflet_id} = layer;
         var color = layer.options.fillColor;
-        var area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+        var areameter = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+        var area = areameter/10000;
         if(layerType === "polygon"){
             if (color === "white") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(246.15 * area/10000);
-                let carbon = Math.round(14.85 * area/10000);
+                let energy = Math.round(246.15 * area);
+                let carbon = Math.round(14.85 * area);
                 setTotalMisEnergy(totalMisEnergy => totalMisEnergy+ energy);
                 setTotalMisArea (totalMisArea => totalMisArea + area);
                 setTotalMisCarbon (totalMisCarbon => totalMisCarbon + carbon);
@@ -154,8 +155,8 @@ function TempLocation() {
                 console.log("white");
             } else if (color === "red") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(520.38 * area/10000);
-                let carbon = Math.round(29.453 * area/10000);
+                let energy = Math.round(520.38 * area);
+                let carbon = Math.round(29.453 * area);
                 setTotalMaizArea (totalMaizArea => totalMaizArea + area);
                 setTotalMaizEnergy (totalMaizEnergy => totalMaizEnergy + energy);
                 setTotalMaizCarbon (totalMaizCarbon => totalMaizCarbon + carbon);
@@ -165,8 +166,8 @@ function TempLocation() {
                 console.log("red");
             } else if (color === "blue") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(128.32 * area/10000);
-                let carbon = Math.round(7.263 * area/10000);
+                let energy = Math.round(128.32 * area);
+                let carbon = Math.round(7.263 * area);
                 setTotalCatArea (totalCatArea => totalCatArea + area);
                 setTotalCatenergy (totalCatEnergy => totalCatEnergy + energy);
                 setTotalCatCarbon (totalCatCarbon => totalCatCarbon + carbon);
@@ -177,8 +178,8 @@ function TempLocation() {
             } else {
                 console.log("else");
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(262.46 * area/10000);
-                let carbon = Math.round(14.855 * area/10000);
+                let energy = Math.round(262.46 * area);
+                let carbon = Math.round(14.855 * area);
                 setTotalReedArea (totalReedArea => totalReedArea + area);
                 setTotalReedenergy (totalReedenergy => totalReedenergy + energy);
                 setTotalReedCarbon(totalReedCarbon => totalReedCarbon + carbon);
@@ -194,20 +195,24 @@ function TempLocation() {
     
     const _onEdited = e => {
         const {layers: {_layers}} = e;
-        Object.values(_layers).map(({_leaflet_id, editing}) => {
-            setMapLayers( layers => layers.map( l => l.id === _leaflet_id ? {...l, latlngs: { ...editing.latlngs[0]}}: l));
+        Object.values(_layers).map((a) => {
+            var color = a.options.fillColor;
+            var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
+            setMapLayers( layers => layers.map( l => l.id === a._leaflet_id ? {...l, latlngs: { ...a.editing.latlngs[0]}}: l));
         });
     };
+    
 
     const _onDeleted = (e) => {
         const { layers: {_layers}} = e;
         Object.values(_layers).map((a) => {
-            var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
+            var areameter = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
+            var area = areameter/10000;
             var color = a.options.fillColor;
             if (color === "white") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(246.15 * area/10000);
-                let carbon = Math.round(14.85 * area/10000);
+                let energy = Math.round(246.15 * area);
+                let carbon = Math.round(14.85 * area);
                 setTotalMisEnergy(totalMisEnergy => totalMisEnergy - energy);
                 setTotalMisArea (totalMisArea => totalMisArea - area);
                 setTotalMisCarbon (totalMisCarbon => totalMisCarbon - carbon);
@@ -216,8 +221,8 @@ function TempLocation() {
 
             } else if (color === "red") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(520.38 * area/10000);
-                let carbon = Math.round(29.453 * area/10000);
+                let energy = Math.round(520.38 * area);
+                let carbon = Math.round(29.453 * area);
                 setTotalMaizArea (totalMaizArea => totalMaizArea - area);
                 setTotalMaizEnergy (totalMaizEnergy => totalMaizEnergy - energy);
                 setTotalMaizCarbon (totalMaizCarbon => totalMaizCarbon - carbon);
@@ -226,8 +231,8 @@ function TempLocation() {
 
             } else if (color === "blue") {
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(128.32 * area/10000);
-                let carbon = Math.round(7.263 * area/10000);
+                let energy = Math.round(128.32 * area);
+                let carbon = Math.round(7.263 * area);
                 setTotalCatArea (totalCatArea => totalCatArea - area);
                 setTotalCatenergy (totalCatEnergy => totalCatEnergy - energy);
                 setTotalCatCarbon (totalCatCarbon => totalCatCarbon - carbon);
@@ -237,8 +242,8 @@ function TempLocation() {
             } else {
                 console.log("else");
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(262.46 * area/10000);
-                let carbon = Math.round(14.855 * area/10000);
+                let energy = Math.round(262.46 * area);
+                let carbon = Math.round(14.855 * area);
                 setTotalReedArea (totalReedArea => totalReedArea - area);
                 setTotalReedenergy (totalReedenergy => totalReedenergy - energy);
                 setTotalReedCarbon(totalReedCarbon => totalReedCarbon - carbon);
@@ -314,7 +319,7 @@ function TempLocation() {
     return(
         <section>
         <div className="mapcontainerof">
-        <MapContainer style={{ height: "90vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
+        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
         <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
             <TileLayer
@@ -369,14 +374,16 @@ function TempLocation() {
             <div>
             </div>
         </div> */}
-        <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
-        <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon}  />
         <div className="bufferset">
-            <input type="text" onChange={getInputValue}/>
-            <button onClick ={updateBuffer}>Update the Buffer</button>
+            <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
+            <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
+        </div>
+        <div className="chartholder">
+            <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
+            <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon}  />
         </div>
         {/* <button onClick ={startdrawing}>test</button> */}
-        <pre className="text-left">{JSON.stringify(mapLayers, 0, 2)}</pre>
+        {/* <pre className="text-left" >{JSON.stringify(mapLayers, 0, 2)}</pre> */}
         </section>
     );
 }
