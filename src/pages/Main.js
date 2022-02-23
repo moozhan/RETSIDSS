@@ -178,7 +178,7 @@ function TempLocation() {
             var areameter = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
             var area = areameter/10000;
             var color = a.options.fillColor;
-            if (color === "white") {
+            if (color === "#caf270") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(246.15 * area);
                 let carbon = Math.round(14.85 * area);
@@ -188,7 +188,7 @@ function TempLocation() {
                 settotalEnergy (totalEnergy => totalEnergy - energy);
                 settotalCarbon (totalCarbon => totalCarbon - carbon);
 
-            } else if (color === "red") {
+            } else if (color === "#45c490") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(520.38 * area);
                 let carbon = Math.round(29.453 * area);
@@ -198,7 +198,7 @@ function TempLocation() {
                 settotalEnergy (totalEnergy => totalEnergy - energy);
                 settotalCarbon (totalCarbon => totalCarbon - carbon);
 
-            } else if (color === "blue") {
+            } else if (color === "#008d93") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(128.32 * area);
                 let carbon = Math.round(7.263 * area);
@@ -244,23 +244,6 @@ function TempLocation() {
             shadowUrl: '',
         });
     
-
-    //list of Wind Turbines control
-    //==============================================================================================
-    // function TurbineList(props) {
-    //     const turbines = props.numbers;
-    //     const listTurbines = turbines.map((number) =>
-    //         <li className="infralist"key={number.id}>
-    //             <p>Infrastrucutre Type: {number.type}</p>
-    //             <p>Infrastrucutre ID: {number.id}</p>
-    //             <p>Infrastructure Location/area: {number.latLngs.lat} {number.latLngs.lng} {number.area}</p>
-    //             {/* <p>{number.popup}</p> */}
-    //         </li>
-    //     );
-    //     return (
-    //         <ul className="turbine"> {listTurbines}</ul>
-    //     );
-    // }
     
     //=======================Form =====================//
         const getInputValue = (event)=> {
@@ -320,42 +303,6 @@ function TempLocation() {
         </div>
         <div className="chartholder">
             <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
-            {/* <div className="bufferzone" >
-                <div className="flex">
-                    <div className="flex20">
-                        <img className="smallimage" src={miscanthus}></img>
-                    </div>
-                    <div className="flex80">
-                        <p> Every hectar of <span className='bold'> Miscanthus </span>can produce <span className='bold'>246.15 GJ </span>energy and save <span className='bold'> 13932 Kg </span>of CO2 per year.</p>
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="flex20">
-                        <img className="smallimage" src={maze}></img>
-                    </div>
-                    <div>
-                        <p className="flex80"> Every hectar of <span className='bold'>Maize </span>can produce <span className='bold'>520.38 GJ </span> energy and save <span className='bold'>29453 Kg </span> of CO2 per year.</p>
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="flex20">
-                        <img  className="smallimage" src={cattail}></img>
-                    </div>
-                    <div>
-                        <p className="flex80"> Every hectar of <span className='bold'>Cattail </span>can produce <span className='bold'>128.32 GJ </span>energy and save <span className='bold'>7263 Kg </span>of CO2 per year.</p>
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="flex20">
-                        <img  className="smallimage" src={reed}></img>
-                    </div>
-                    <div>
-                        <p className="flex80"> Every hectar of <span className='bold'>Reed </span>can produce <span className='bold'>262.46 GJ </span>energy and save <span className='bold'>14855 Kg </span>of CO2 per year.</p>
-                    </div>   
-                </div>
-
-
-            </div> */}
 
             <div className='margin'>
                 <table>
