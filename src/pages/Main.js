@@ -305,8 +305,8 @@ function TempLocation() {
         </MapContainer>
         </div>
         <div className="bufferset">
-                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
                 <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue}/>
+                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
         </div>
         
         <button className="bufferdel" onClick={deleteBuffer}>delete buffer</button>
