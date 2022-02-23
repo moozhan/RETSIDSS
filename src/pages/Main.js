@@ -7,8 +7,6 @@ import Natuura2000 from '../components/mapLayers/Natuura2000';
 import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
 import L, { map } from 'leaflet';
-import { useEffect } from 'react/cjs/react.development';
-import Layout from '../components/layout/Layout';
 import './main.css';
 import {rooftopenergyStateContext, turbinenergyValueStateContext} from '../Store';
 import miscanthus from '../components/images/Miscanthus.png';
@@ -16,41 +14,11 @@ import maze from '../components/images/maze.png';
 import cattail from '../components/images/cattail.png';
 import reed from '../components/images/reed.png';
 import buffer from "@turf/buffer";
-import Plot from 'react-plotly.js';
 import Bargraph from '../components/mapdetails/Graph';
 import StackedBargraph from '../components/mapdetails/StackedGraph';
 
 function TempLocation() {
-    // const [rooftopenergy, setrooftopenergy] = useContext(rooftopenergyStateContext);
-    // const [turbinenergyValue, setturbinenergyValue] = useContext(turbinenergyValueStateContext);
-    // const [added, setTotalEnergy] = useState(0);
-    // const [seconds, setSeconds] = useState(0);
-    // const [years, setYears] = useState(2021);
-    // const [hidden, setHidden] = useState(false);
-    // const [hiddentoo, setHiddentoo] = useState(false);
-    // const [turbinvalue, setturbinvalue] = useState(3.5);
-    // const totalArea = mapLayers.reduce((totalarea, area) => totalarea + area.area, 0);
-    // const energyfarm = totalArea* 750/10000;
-    // const agriculture = totalArea/10000;
-    // const totalEnergy = energyfarm + added + rooftopenergy;
-    // const lefttogoal =  147000 - totalEnergy;
-    // const farm = energyfarm.toFixed(2);
-    // const smalltotalEnergy = totalEnergy.toFixed(2);
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       setYears(year => year + 1);
-    //       if (added !==0){
-    //       setTotalEnergy(added => added + turbinenergyValue);
-    //       }
-    //       setSeconds(seconds => seconds + 1);
-    //     }, 480000);
-    //     return () => clearInterval(interval);
-    //   }, []);
-    //console.log(turbinenergyValue);
-
     const [mapLayers, setMapLayers] = useState([]);
-    const [bufferLayers, setBufferLayers] = useState([]);
     const [totalMisArea, setTotalMisArea] = useState(0);
     const [totalMaizArea, setTotalMaizArea] = useState(0);
     const [totalCatArea, setTotalCatArea] = useState(0);
@@ -69,13 +37,14 @@ function TempLocation() {
     const [map, setMap] = useState(0);
     const [bufferValue, setBufferValue] = useState(0);
     const [draggable, setDraggable] = useState(false);
+    const [hidden, setHidden] = useState(false);
 
     // Buffer =====================//
-    var buffered = buffer(multipleGeojson, 500, {units: 'meters'});
+    var buffered = buffer(multipleGeojson, 100, {units: 'meters'});
 
     //======ShapeOptions: setting the color of the polygon ===//
     var Miscanthus = {            
-        fillColor: 'white',
+        fillColor: '#caf270',
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -83,7 +52,7 @@ function TempLocation() {
         fillOpacity: 0.5
     }
     var Maize = {            
-        fillColor: 'red',
+        fillColor: '#45c490',
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -91,7 +60,7 @@ function TempLocation() {
         fillOpacity: 0.5
     }
     var Cattail = {            
-        fillColor: 'blue',
+        fillColor: '#008d93',
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -99,7 +68,7 @@ function TempLocation() {
         fillOpacity: 0.5
     }
     var Reed = {            
-        fillColor: 'green',
+        fillColor: '#2e5468',
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -142,7 +111,7 @@ function TempLocation() {
         var areameter = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
         var area = areameter/10000;
         if(layerType === "polygon"){
-            if (color === "white") {
+            if (color === "#caf270") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(246.15 * area);
                 let carbon = Math.round(14.85 * area);
@@ -153,7 +122,7 @@ function TempLocation() {
                 settotalCarbon (totalCarbon => totalCarbon + carbon);
                 setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Miscanthus"}]);
                 console.log("white");
-            } else if (color === "red") {
+            } else if (color === "#45c490") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(520.38 * area);
                 let carbon = Math.round(29.453 * area);
@@ -164,7 +133,7 @@ function TempLocation() {
                 settotalCarbon (totalCarbon => totalCarbon + carbon);
                 setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Maize"}]);
                 console.log("red");
-            } else if (color === "blue") {
+            } else if (color === "#008d93") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(128.32 * area);
                 let carbon = Math.round(7.263 * area);
@@ -176,7 +145,7 @@ function TempLocation() {
                 setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Cattail"}]);
                 console.log("blue");
             } else {
-                console.log("else");
+                console.log("#2e5468");
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(262.46 * area);
                 let carbon = Math.round(14.855 * area);
@@ -308,13 +277,20 @@ function TempLocation() {
         buff.addTo(bufferZone);   
         var checked = bufferZone.getLayers().length;
         console.log(checked);     
-    }
-    //=========================== Graph =========================//
-    // function startdrawing(){
-    //     drawRef.current.leafletElement._toolbars.draw._modes.polygon.handler.enable();
-    // }
+    }     
 
-        
+
+    const BufferCreation = () => {
+
+        return(
+            <div>
+                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
+                <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
+            </div>
+        );
+    }
+
+
     
     return(
         <section>
@@ -350,36 +326,48 @@ function TempLocation() {
         </LayersControl>
         </MapContainer>
         </div>
-        {/* <div className="detailsofmap">
-            <div className="icons">
-                <img src={miscanthus} className="logosolarfarm"></img>
-            </div>
-            <div className="icons">
-                <img src={maze} className="logosolarfarm"></img>
-            </div>
-            <div className="icons">
-                <img src={cattail} className="logosolarfarm"></img>
-            </div>
-            <div className="icons">
-                <img src={reed} className="logosolarfarm"></img>
-            </div>
-            <div className="icons">
-                <p><span>Total Energy Produced:</span> {totalEnergy}</p>
-            </div>
-            <div className="icons">
-                <p><span>Total Co2 Emission Saving:</span> {totalCarbon}</p>
-            </div>
-        </div>
-        <div className="details">
-            <div>
-            </div>
-        </div> */}
         <div className="bufferset">
-            <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
-            <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
+                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
+                <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
         </div>
         <div className="chartholder">
             <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
+            <div className="bufferzone" >
+                <div className="flex">
+                    <div className="flex20">
+                        <img className="smallimage" src={miscanthus}></img>
+                    </div>
+                    <div className="flex80">
+                        <p> Every hectar of <span className='bold'> Miscanthus </span>can produce <span className='bold'>246.15 GJ </span>energy and save <span className='bold'> 13932 Kg </span>of CO2 per year.</p>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="flex20">
+                        <img className="smallimage" src={maze}></img>
+                    </div>
+                    <div>
+                        <p className="flex80"> Every hectar of <span className='bold'>Maize </span>can produce <span className='bold'>520.38 GJ </span> energy and save <span className='bold'>29453 Kg </span> of CO2 per year.</p>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="flex20">
+                        <img  className="smallimage" src={cattail}></img>
+                    </div>
+                    <div>
+                        <p className="flex80"> Every hectar of <span className='bold'>Cattail </span>can produce <span className='bold'>128.32 GJ </span>energy and save <span className='bold'>7263 Kg </span>of CO2 per year.</p>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="flex20">
+                        <img  className="smallimage" src={reed}></img>
+                    </div>
+                    <div>
+                        <p className="flex80"> Every hectar of <span className='bold'>Reed </span>can produce <span className='bold'>262.46 GJ </span>energy and save <span className='bold'>14855 Kg </span>of CO2 per year.</p>
+                    </div>   
+                </div>
+
+
+            </div>
             <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon}  />
         </div>
         {/* <button onClick ={startdrawing}>test</button> */}

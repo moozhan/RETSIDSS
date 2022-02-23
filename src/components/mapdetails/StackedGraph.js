@@ -6,7 +6,7 @@ Chart.register(...registerables);
 var StackedBargraph = ({totalMisEnergy,totalMaizEnergy,totalCatEnergy,totalReedenergy, totalMisCarbon, totalMaizCarbon, totalCatCarbon, totalReedCarbon}) => {
 
 const [state,setState] = useState({
-    labels:["Energy Produced","CO2 Saving"],
+    labels:["Energy Produced (GJ per year)","CO2 Saving (Kg per year)"],
     datasets: [{
         label: 'Miscanthus',
         backgroundColor: "#caf270",
@@ -28,7 +28,7 @@ const [state,setState] = useState({
 
 useEffect(() => {
     setState({
-        labels:["Energy Produced","CO2 Saving"],
+        labels:["Energy Produced (GJ per year)","CO2 Saving (Kg per year)"],
         datasets: [{
             label: 'Miscanthus',
             backgroundColor: "#caf270",

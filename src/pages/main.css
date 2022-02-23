@@ -249,26 +249,35 @@ section .mainPage {
 .Chartstyled {
   background-color: white;
   width: 450px;
-  height: 200px;
-  margin-left: 70vw;
-  z-index: 50000;
+  height: 220px;
+  z-index: inherit;
+  margin-right: 2em;
+  margin-left: 3em;
   /* margin-top: 0.5em; */
 }
 
 .StackedChartstyled {
   background-color: white;
   width: 450px;
-  height: 200px;
-  margin-left: 1vw;
-  margin-top: -12em;
-  z-index: 50000;
+  height: 220px;
+  z-index: inherit;
+  margin-right: 2em;
 }
 
 .bufferset {
-  margin-top: -3vh;
+  /* margin-top: -3vh; */
+  z-index: 50000;
+  margin-left: 0.8em;
   position: absolute;
-  z-index: 4000;
-  margin-left: 1vw;
+  margin-top: -33em;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  text-align: center;
+  border: 1px solid rgb(150, 148, 148);
+}
+.buffervalues {
+  width: 60px;
 }
 
 .leaflet-draw-edit-edit {
@@ -330,7 +339,7 @@ section .mainPage {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  transform: scale(0.6);
+  transform: scale(0.5);
   width: 60px;
   height: 70px;
 }
@@ -342,35 +351,45 @@ section .mainPage {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  transform: scale(0.6);
+  transform: scale(0.5);
   width: 60px;
   height: 70px;
 }
 
-.bufferset {
-  margin-top: -55vh;
-  margin-left: 0.8em;
-}
-
-.buffercreation {
-  width: 60px;
+.bufferzone {
+  width: 40vw;
+  margin-right: 1vw;
   padding: 5px;
   height: 50px;
   background-color: white;
-  border: 1px solid rgb(150, 148, 148);
-}
-
-.buffervalues {
-  height: 30px;
-  display: none;
 }
 
 .chartholder {
   width: 100%;
   background-color: white;
   opacity: 0.9;
-  z-index: 500000;
+  z-index: 50000;
   height: 220px;
   position: absolute;
   margin-top: -15em;
+  display: flex;
+}
+
+.smallimage {
+  height: 50px;
+  width: 50px;
+}
+
+.flex {
+  display: flex;
+  height: 50px;
+}
+
+.flex80 {
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.3em;
+}
+.bold {
+  font-weight: bold;
 }

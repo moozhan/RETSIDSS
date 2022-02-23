@@ -7,7 +7,7 @@ var Bargraph = ({totalMisArea,totalMaizArea,totalCatArea,totalReedArea}) => {
 
 const [state,setState] = useState({
 
-    labels:["Planted area"],
+    labels:["Planted area (hectares)"],
     datasets:[{
         label: 'Miscanthus',
         backgroundColor: "#caf270",
@@ -29,7 +29,7 @@ const [state,setState] = useState({
 
 useEffect(() => {
     setState({
-        labels:["Planted area"],
+        labels:["Planted area (hectares)"],
         datasets:[{
             label: 'Miscanthus',
             backgroundColor: "#caf270",
@@ -59,7 +59,9 @@ useEffect(() => {
                     display:true,
                     text:'Planted Area',
                     fontSize:20
-                    }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
             }}
         />
     </div>
