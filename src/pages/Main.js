@@ -279,23 +279,11 @@ function TempLocation() {
         console.log(checked);     
     }     
 
-
-    const BufferCreation = () => {
-
-        return(
-            <div>
-                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
-                <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
-            </div>
-        );
-    }
-
-
     
     return(
         <section>
         <div className="mapcontainerof">
-        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
+        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={true} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
         <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
             <TileLayer
@@ -328,7 +316,7 @@ function TempLocation() {
         </div>
         <div className="bufferset">
                 <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
-                <input type="text" placeholder='Enter a value' className="buffervalues" onChange={getInputValue}/>
+                <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue}/>
         </div>
         <div className="chartholder">
             <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />

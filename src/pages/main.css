@@ -269,15 +269,20 @@ section .mainPage {
   z-index: 50000;
   margin-left: 0.8em;
   position: absolute;
-  margin-top: -33em;
+  margin-top: -28.5em;
   width: 60px;
   height: 60px;
-  background-color: white;
   text-align: center;
-  border: 1px solid rgb(150, 148, 148);
 }
 .buffervalues {
   width: 60px;
+  height: 30px;
+}
+
+.buffercreation {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 0.7em;
 }
 
 .leaflet-draw-edit-edit {
