@@ -283,7 +283,7 @@ function TempLocation() {
     return(
         <section>
         <div className="mapcontainerof">
-        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={true} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
+        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
         <LayersControl position="topright">
             <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
             <TileLayer
@@ -320,7 +320,7 @@ function TempLocation() {
         </div>
         <div className="chartholder">
             <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
-            <div className="bufferzone" >
+            {/* <div className="bufferzone" >
                 <div className="flex">
                     <div className="flex20">
                         <img className="smallimage" src={miscanthus}></img>
@@ -355,7 +355,42 @@ function TempLocation() {
                 </div>
 
 
-            </div>
+            </div> */}
+
+            <div className='margin'>
+                <table>
+                    <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th className="middle">Energy Production (KJ/hectare/year)</th>
+                    <th className="middle">CO2 Reduction (Kg/hectare/year)</th>
+                    </tr>
+                    <tr>
+                    <td><span> <img className="smallimage" src={miscanthus}></img></span></td>
+                    <td>Miscanthus</td>
+                    <td className="centered">239.59</td>
+                    <td className="centered">13560.9</td>
+                    </tr>
+                    <tr>
+                    <td><span> <img className="smallimage" src={maze}></img></span></td>
+                    <td>Maize</td>
+                    <td className="centered">520.38</td>
+                    <td className="centered">29453.3</td>
+                    </tr>
+                    <tr>
+                    <td><span> <img className="smallimage" src={cattail}></img></span></td>
+                    <td>Cattail</td>
+                    <td className="centered">128.32</td>
+                    <td className="centered">7262.9</td>
+                    </tr>
+                    <tr>
+                    <td><span> <img className="smallimage" src={reed}></img></span></td>
+                    <td>Reed</td>
+                    <td className="centered">262.46</td>
+                    <td className="centered">14855</td>
+                    </tr>
+                </table>
+                </div>
             <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon}  />
         </div>
         {/* <button onClick ={startdrawing}>test</button> */}

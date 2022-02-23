@@ -269,20 +269,20 @@ section .mainPage {
   z-index: 50000;
   margin-left: 0.8em;
   position: absolute;
-  margin-top: -28.5em;
+  margin-top: -33em;
   width: 60px;
   height: 60px;
   text-align: center;
 }
 .buffervalues {
-  width: 60px;
+  width: 62px;
   height: 30px;
 }
 
 .buffercreation {
   background-color: white;
   border: 1px solid gray;
-  padding: 0.7em;
+  padding: 10px;
 }
 
 .leaflet-draw-edit-edit {
@@ -381,8 +381,8 @@ section .mainPage {
 }
 
 .smallimage {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
 }
 
 .flex {
@@ -397,4 +397,20 @@ section .mainPage {
 }
 .bold {
   font-weight: bold;
+}
+
+.middle {
+  width: 10em;
+  font-size: 14px;
+}
+
+.centered {
+  text-align: center;
+  font-size: 14px;
+}
+
+.margin {
+  margin-top: 0.8em;
+  margin-left: 5em;
+  margin-right: 10em;
 }
