@@ -38,6 +38,7 @@ function TempLocation() {
     const [bufferValue, setBufferValue] = useState(0);
     const [draggable, setDraggable] = useState(false);
     const [hidden, setHidden] = useState(false);
+    const [bufferzone, setBufferzone] = useState();
 
     // Buffer =====================//
     var buffered = buffer(multipleGeojson, 100, {units: 'meters'});
@@ -260,8 +261,14 @@ function TempLocation() {
         buff.addTo(bufferZone);   
         var checked = bufferZone.getLayers().length;
         console.log(checked);     
+        setBufferzone(bufferZone);
     }     
 
+
+    function deleteBuffer() {
+        map.removeLayer(bufferzone);
+
+    }
     
     return(
         <section>
@@ -301,6 +308,9 @@ function TempLocation() {
                 <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
                 <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue}/>
         </div>
+        
+        <button className="bufferdel" onClick={deleteBuffer}>delete buffer</button>
+
         <div className="chartholder">
             <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
 
