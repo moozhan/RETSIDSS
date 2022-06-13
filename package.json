@@ -2,6 +2,10 @@
   "name": "react-course",
   "version": "0.1.0",
   "private": true,
+  "engines": { 
+    "node": "17.4.0",
+    "npm": "8.3.1"
+    }, 
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",
     "@emotion/react": "^11.8.1",
@@ -14,6 +18,7 @@
     "algoliasearch": "^4.10.5",
     "axios": "^0.21.4",
     "chart.js": "^3.7.1",
+    "create-app-react": "^1.0.6",
     "framer-motion": "^4.1.17",
     "http-proxy-middleware": "^2.0.1",
     "install": "^0.13.0",

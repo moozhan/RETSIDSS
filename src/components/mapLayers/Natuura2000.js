@@ -29,7 +29,7 @@ function Natuura2000() {
     });
     return(
         <LayersControl.Overlay name="Natuura 2000 Boundaries">
-        <FeatureGroup name="neighbourhood">
+        <FeatureGroup name="Natuura 2000">
             {feature && (
                 <GeoJSON 
                     data={feature} 
