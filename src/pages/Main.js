@@ -1,14 +1,13 @@
-import React, {useState, useContext} from 'react';
-import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, LayersControl, GeoJSON, FeatureGroup, LayerGroup} from 'react-leaflet';
-import { EditControl} from "react-leaflet-draw";
+import React, { useState, useContext } from 'react';
+import { MapContainer, TileLayer, LayersControl, GeoJSON, FeatureGroup, LayerGroup } from 'react-leaflet';
+import { EditControl } from "react-leaflet-draw";
 import 'leaflet/dist/leaflet.css';
-import Natuura2000 from '../components/mapLayers/Natuura2000';
+// import Natuura2000 from '../components/mapLayers/Natuura2000';
 import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
 import L, { map } from 'leaflet';
 import './main.css';
-import {rooftopenergyStateContext, turbinenergyValueStateContext} from '../Store';
+import { rooftopenergyStateContext, turbinenergyValueStateContext } from '../Store';
 import miscanthus from '../components/images/Miscanthus.png';
 import maze from '../components/images/maze.png';
 import cattail from '../components/images/cattail.png';
@@ -41,10 +40,10 @@ function TempLocation() {
     const [bufferzone, setBufferzone] = useState();
 
     // Buffer =====================//
-    var buffered = buffer(multipleGeojson, 100, {units: 'meters'});
+    var buffered = buffer(multipleGeojson, 100, { units: 'meters' });
 
     //======ShapeOptions: setting the color of the polygon ===//
-    var Miscanthus = {            
+    var Miscanthus = {
         fillColor: '#caf270',
         weight: 1,
         opacity: 1,
@@ -52,7 +51,7 @@ function TempLocation() {
         dashArray: '2',
         fillOpacity: 0.5
     }
-    var Maize = {            
+    var Maize = {
         fillColor: '#45c490',
         weight: 1,
         opacity: 1,
@@ -60,7 +59,7 @@ function TempLocation() {
         dashArray: '2',
         fillOpacity: 0.5
     }
-    var Cattail = {            
+    var Cattail = {
         fillColor: '#008d93',
         weight: 1,
         opacity: 1,
@@ -68,7 +67,7 @@ function TempLocation() {
         dashArray: '2',
         fillOpacity: 0.5
     }
-    var Reed = {            
+    var Reed = {
         fillColor: '#2e5468',
         weight: 1,
         opacity: 1,
@@ -82,22 +81,22 @@ function TempLocation() {
             return [
                 {
                     enabled: true,
-                    handler: new L.Draw.Polygon(map, {shapeOptions: Miscanthus}),
+                    handler: new L.Draw.Polygon(map, { shapeOptions: Miscanthus }),
                     title: 'Plant Miscanthus',
                 },
                 {
                     enabled: true,
-                    handler: new L.Draw.Polygon(map, {shapeOptions: Maize}),
+                    handler: new L.Draw.Polygon(map, { shapeOptions: Maize }),
                     title: 'Plant Maize'
                 },
                 {
                     enabled: true,
-                    handler: new L.Draw.Polygon(map, {shapeOptions: Cattail}),
+                    handler: new L.Draw.Polygon(map, { shapeOptions: Cattail }),
                     title: 'Plant Cattail'
                 },
                 {
                     enabled: true,
-                    handler: new L.Draw.Polygon(map, {shapeOptions: Reed}),
+                    handler: new L.Draw.Polygon(map, { shapeOptions: Reed }),
                     title: 'Plant Reed'
                 }
             ];
@@ -106,123 +105,123 @@ function TempLocation() {
 
     const _onCreate = e => {
         setDraggable(false);
-        const {layerType, layer} = e;
-        const{_leaflet_id} = layer;
+        const { layerType, layer } = e;
+        const { _leaflet_id } = layer;
         var color = layer.options.fillColor;
         var areameter = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
-        var area = areameter/10000;
-        if(layerType === "polygon"){
+        var area = areameter / 10000;
+        if (layerType === "polygon") {
             if (color === "#caf270") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(246.15 * area);
                 let carbon = Math.round(14.85 * area);
-                setTotalMisEnergy(totalMisEnergy => totalMisEnergy+ energy);
-                setTotalMisArea (totalMisArea => totalMisArea + area);
-                setTotalMisCarbon (totalMisCarbon => totalMisCarbon + carbon);
-                settotalEnergy (totalEnergy => totalEnergy + energy);
-                settotalCarbon (totalCarbon => totalCarbon + carbon);
-                setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Miscanthus"}]);
+                setTotalMisEnergy(totalMisEnergy => totalMisEnergy + energy);
+                setTotalMisArea(totalMisArea => totalMisArea + area);
+                setTotalMisCarbon(totalMisCarbon => totalMisCarbon + carbon);
+                settotalEnergy(totalEnergy => totalEnergy + energy);
+                settotalCarbon(totalCarbon => totalCarbon + carbon);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Miscanthus" }]);
                 console.log("white");
             } else if (color === "#45c490") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(520.38 * area);
                 let carbon = Math.round(29.453 * area);
-                setTotalMaizArea (totalMaizArea => totalMaizArea + area);
-                setTotalMaizEnergy (totalMaizEnergy => totalMaizEnergy + energy);
-                setTotalMaizCarbon (totalMaizCarbon => totalMaizCarbon + carbon);
-                settotalEnergy (totalEnergy => totalEnergy + energy);
-                settotalCarbon (totalCarbon => totalCarbon + carbon);
-                setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Maize"}]);
+                setTotalMaizArea(totalMaizArea => totalMaizArea + area);
+                setTotalMaizEnergy(totalMaizEnergy => totalMaizEnergy + energy);
+                setTotalMaizCarbon(totalMaizCarbon => totalMaizCarbon + carbon);
+                settotalEnergy(totalEnergy => totalEnergy + energy);
+                settotalCarbon(totalCarbon => totalCarbon + carbon);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Maize" }]);
                 console.log("red");
             } else if (color === "#008d93") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(128.32 * area);
                 let carbon = Math.round(7.263 * area);
-                setTotalCatArea (totalCatArea => totalCatArea + area);
-                setTotalCatenergy (totalCatEnergy => totalCatEnergy + energy);
-                setTotalCatCarbon (totalCatCarbon => totalCatCarbon + carbon);
-                settotalEnergy (totalEnergy => totalEnergy + energy);
-                settotalCarbon (totalCarbon => totalCarbon + carbon);
-                setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Cattail"}]);
+                setTotalCatArea(totalCatArea => totalCatArea + area);
+                setTotalCatenergy(totalCatEnergy => totalCatEnergy + energy);
+                setTotalCatCarbon(totalCatCarbon => totalCatCarbon + carbon);
+                settotalEnergy(totalEnergy => totalEnergy + energy);
+                settotalCarbon(totalCarbon => totalCarbon + carbon);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Cattail" }]);
                 console.log("blue");
             } else {
                 console.log("#2e5468");
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(262.46 * area);
                 let carbon = Math.round(14.855 * area);
-                setTotalReedArea (totalReedArea => totalReedArea + area);
-                setTotalReedenergy (totalReedenergy => totalReedenergy + energy);
+                setTotalReedArea(totalReedArea => totalReedArea + area);
+                setTotalReedenergy(totalReedenergy => totalReedenergy + energy);
                 setTotalReedCarbon(totalReedCarbon => totalReedCarbon + carbon);
-                settotalEnergy (totalEnergy => totalEnergy + energy);
-                settotalCarbon (totalCarbon => totalCarbon + carbon);
-                setMapLayers(layers => [...layers, {id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Reed"}]);
+                settotalEnergy(totalEnergy => totalEnergy + energy);
+                settotalCarbon(totalCarbon => totalCarbon + carbon);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Reed" }]);
             }
         };
         settotalArea(totalArea => totalArea + area);
 
     };
 
-    
+
     const _onEdited = e => {
-        const {layers: {_layers}} = e;
+        const { layers: { _layers } } = e;
         Object.values(_layers).map((a) => {
             var color = a.options.fillColor;
             var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
-            setMapLayers( layers => layers.map( l => l.id === a._leaflet_id ? {...l, latlngs: { ...a.editing.latlngs[0]}}: l));
+            setMapLayers(layers => layers.map(l => l.id === a._leaflet_id ? { ...l, latlngs: { ...a.editing.latlngs[0] } } : l));
         });
     };
-    
+
 
     const _onDeleted = (e) => {
-        const { layers: {_layers}} = e;
+        const { layers: { _layers } } = e;
         Object.values(_layers).map((a) => {
             var areameter = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
-            var area = areameter/10000;
+            var area = areameter / 10000;
             var color = a.options.fillColor;
             if (color === "#caf270") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(246.15 * area);
                 let carbon = Math.round(14.85 * area);
                 setTotalMisEnergy(totalMisEnergy => totalMisEnergy - energy);
-                setTotalMisArea (totalMisArea => totalMisArea - area);
-                setTotalMisCarbon (totalMisCarbon => totalMisCarbon - carbon);
-                settotalEnergy (totalEnergy => totalEnergy - energy);
-                settotalCarbon (totalCarbon => totalCarbon - carbon);
+                setTotalMisArea(totalMisArea => totalMisArea - area);
+                setTotalMisCarbon(totalMisCarbon => totalMisCarbon - carbon);
+                settotalEnergy(totalEnergy => totalEnergy - energy);
+                settotalCarbon(totalCarbon => totalCarbon - carbon);
 
             } else if (color === "#45c490") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(520.38 * area);
                 let carbon = Math.round(29.453 * area);
-                setTotalMaizArea (totalMaizArea => totalMaizArea - area);
-                setTotalMaizEnergy (totalMaizEnergy => totalMaizEnergy - energy);
-                setTotalMaizCarbon (totalMaizCarbon => totalMaizCarbon - carbon);
-                settotalEnergy (totalEnergy => totalEnergy - energy);
-                settotalCarbon (totalCarbon => totalCarbon - carbon);
+                setTotalMaizArea(totalMaizArea => totalMaizArea - area);
+                setTotalMaizEnergy(totalMaizEnergy => totalMaizEnergy - energy);
+                setTotalMaizCarbon(totalMaizCarbon => totalMaizCarbon - carbon);
+                settotalEnergy(totalEnergy => totalEnergy - energy);
+                settotalCarbon(totalCarbon => totalCarbon - carbon);
 
             } else if (color === "#008d93") {
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(128.32 * area);
                 let carbon = Math.round(7.263 * area);
-                setTotalCatArea (totalCatArea => totalCatArea - area);
-                setTotalCatenergy (totalCatEnergy => totalCatEnergy - energy);
-                setTotalCatCarbon (totalCatCarbon => totalCatCarbon - carbon);
-                settotalEnergy (totalEnergy => totalEnergy - energy);
-                settotalCarbon (totalCarbon => totalCarbon - carbon);
+                setTotalCatArea(totalCatArea => totalCatArea - area);
+                setTotalCatenergy(totalCatEnergy => totalCatEnergy - energy);
+                setTotalCatCarbon(totalCatCarbon => totalCatCarbon - carbon);
+                settotalEnergy(totalEnergy => totalEnergy - energy);
+                settotalCarbon(totalCarbon => totalCarbon - carbon);
 
             } else {
                 console.log("else");
                 //var popup = layer.bindPopup(popupContent);
                 let energy = Math.round(262.46 * area);
                 let carbon = Math.round(14.855 * area);
-                setTotalReedArea (totalReedArea => totalReedArea - area);
-                setTotalReedenergy (totalReedenergy => totalReedenergy - energy);
+                setTotalReedArea(totalReedArea => totalReedArea - area);
+                setTotalReedenergy(totalReedenergy => totalReedenergy - energy);
                 setTotalReedCarbon(totalReedCarbon => totalReedCarbon - carbon);
-                settotalEnergy (totalEnergy => totalEnergy - energy);
-                settotalCarbon (totalCarbon => totalCarbon - carbon);
+                settotalEnergy(totalEnergy => totalEnergy - energy);
+                settotalCarbon(totalCarbon => totalCarbon - carbon);
             }
 
-            setMapLayers( layers => 
-                layers.filter( l => l.id !== a._leaflet_id));
+            setMapLayers(layers =>
+                layers.filter(l => l.id !== a._leaflet_id));
         });
     };
 
@@ -231,127 +230,127 @@ function TempLocation() {
     const infrastructures = mapLayers.length;
 
 
-    let myFilter =[
+    let myFilter = [
         'grayscale: 40%',
     ];
 
     //Marker Setup
     //==============================================================================================
-        delete L.Icon.Default.prototype._getIconUrl;
+    delete L.Icon.Default.prototype._getIconUrl;
 
-        L.Icon.Default.mergeOptions({
-            iconRetinaUrl: 'https://cdn4.iconfinder.com/data/icons/ecology-environmentalism-line/56/Untitled-1-34-512.png',
-            iconUrl: 'https://cdn4.iconfinder.com/data/icons/ecology-environmentalism-line/56/Untitled-1-34-512.png',
-            shadowUrl: '',
-        });
-    
-    
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://cdn4.iconfinder.com/data/icons/ecology-environmentalism-line/56/Untitled-1-34-512.png',
+        iconUrl: 'https://cdn4.iconfinder.com/data/icons/ecology-environmentalism-line/56/Untitled-1-34-512.png',
+        shadowUrl: '',
+    });
+
+
     //=======================Form =====================//
-        const getInputValue = (event)=> {
-            const userValue = event.target.value;
-            setBufferValue(userValue);
-            console.log(bufferValue);
-        }
+    const getInputValue = (event) => {
+        const userValue = event.target.value;
+        setBufferValue(userValue);
+        console.log(bufferValue);
+    }
 
     //========================== Update Buffer =================//
     function updateBuffer() {
-        var bufferZone = L.featureGroup().addTo(map);      
-        var buffered = buffer(multipleGeojson, bufferValue, {units: 'meters'});
+        var bufferZone = L.featureGroup().addTo(map);
+        var buffered = buffer(multipleGeojson, bufferValue, { units: 'meters' });
         var buff = L.geoJson(buffered);
-        buff.addTo(bufferZone);   
+        buff.addTo(bufferZone);
         var checked = bufferZone.getLayers().length;
-        console.log(checked);     
+        console.log(checked);
         setBufferzone(bufferZone);
-    }     
+    }
 
 
     function deleteBuffer() {
         map.removeLayer(bufferzone);
 
     }
-    
-    return(
+
+    return (
         <section>
-        <div className="mapcontainerof">
-        <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated ={setMap} draggable= {false}>
-        <LayersControl position="topright">
-            <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
-            <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            filter= "myFilter"
-            />
-        </LayersControl.BaseLayer>
-            <FeatureGroup>
-                <EditControl 
-                    position="topleft" 
-                    onCreated={_onCreate} 
-                    onEdited={_onEdited} 
-                    onDeleted={_onDeleted} 
-                    draw={{rectangle: false, polyline:false, circle: false, circlemarker: false, marker: false}}/>
-            </FeatureGroup>
-            <LayerGroup>
-                <Natuura2000 />
-                <LayersControl.Overlay name="Natuura 2000 Buffer">
-                <FeatureGroup name="buffered">
-                    <GeoJSON 
-                        data={buffered}
-                        style={{ color: "gold", opacity: 1, fillOpacity: 0.4 }}
-                    />
-                </FeatureGroup>
-                </LayersControl.Overlay>
-            </LayerGroup>
-        </LayersControl>
-        </MapContainer>
-        </div>
-        <div className="bufferset">
-                <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue}/>
-                <button onClick ={updateBuffer} className="buffercreation">Create Buffer</button>
-        </div>
-        
-        <button className="bufferdel" onClick={deleteBuffer}>delete buffer</button>
+            <div className="mapcontainerof">
+                <MapContainer style={{ height: "100vh", width: "100vww" }} center={[52.473351, 6.667982]} zoom={13.5} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.EPSG3857} whenCreated={setMap} draggable={false}>
+                    <LayersControl position="topright">
+                        <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
+                            <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                filter="myFilter"
+                            />
+                        </LayersControl.BaseLayer>
+                        <FeatureGroup>
+                            <EditControl
+                                position="topleft"
+                                onCreated={_onCreate}
+                                onEdited={_onEdited}
+                                onDeleted={_onDeleted}
+                                draw={{ rectangle: false, polyline: false, circle: false, circlemarker: false, marker: false }} />
+                        </FeatureGroup>
+                        <LayerGroup>
+                            {/* <Natuura2000 /> */}
+                            <LayersControl.Overlay name="Natuura 2000 Buffer">
+                                <FeatureGroup name="buffered">
+                                    <GeoJSON
+                                        data={buffered}
+                                        style={{ color: "gold", opacity: 1, fillOpacity: 0.4 }}
+                                    />
+                                </FeatureGroup>
+                            </LayersControl.Overlay>
+                        </LayerGroup>
+                    </LayersControl>
+                </MapContainer>
+            </div>
+            <div className="bufferset">
+                <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue} />
+                <button onClick={updateBuffer} className="buffercreation">Create Buffer</button>
+            </div>
 
-        <div className="chartholder">
-            <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea}  />
+            <button className="bufferdel" onClick={deleteBuffer}>delete buffer</button>
 
-            <div className='margin'>
-                <table>
-                    <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th className="middle">Energy Production (KJ/hectare/year)</th>
-                    <th className="middle">CO2 Reduction (Kg/hectare/year)</th>
-                    </tr>
-                    <tr>
-                    <td><span> <img className="smallimage" src={miscanthus}></img></span></td>
-                    <td>Miscanthus</td>
-                    <td className="centered">239.59</td>
-                    <td className="centered">13560.9</td>
-                    </tr>
-                    <tr>
-                    <td><span> <img className="smallimage" src={maze}></img></span></td>
-                    <td>Maize</td>
-                    <td className="centered">520.38</td>
-                    <td className="centered">29453.3</td>
-                    </tr>
-                    <tr>
-                    <td><span> <img className="smallimage" src={cattail}></img></span></td>
-                    <td>Cattail</td>
-                    <td className="centered">128.32</td>
-                    <td className="centered">7262.9</td>
-                    </tr>
-                    <tr>
-                    <td><span> <img className="smallimage" src={reed}></img></span></td>
-                    <td>Reed</td>
-                    <td className="centered">262.46</td>
-                    <td className="centered">14855</td>
-                    </tr>
-                </table>
+            <div className="chartholder">
+                <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea} />
+
+                <div className='margin'>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th className="middle">Energy Production (KJ/hectare/year)</th>
+                            <th className="middle">CO2 Reduction (Kg/hectare/year)</th>
+                        </tr>
+                        <tr>
+                            <td><span> <img className="smallimage" src={miscanthus}></img></span></td>
+                            <td>Miscanthus</td>
+                            <td className="centered">239.59</td>
+                            <td className="centered">13560.9</td>
+                        </tr>
+                        <tr>
+                            <td><span> <img className="smallimage" src={maze}></img></span></td>
+                            <td>Maize</td>
+                            <td className="centered">520.38</td>
+                            <td className="centered">29453.3</td>
+                        </tr>
+                        <tr>
+                            <td><span> <img className="smallimage" src={cattail}></img></span></td>
+                            <td>Cattail</td>
+                            <td className="centered">128.32</td>
+                            <td className="centered">7262.9</td>
+                        </tr>
+                        <tr>
+                            <td><span> <img className="smallimage" src={reed}></img></span></td>
+                            <td>Reed</td>
+                            <td className="centered">262.46</td>
+                            <td className="centered">14855</td>
+                        </tr>
+                    </table>
                 </div>
-            <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon}  />
-        </div>
-        {/* <button onClick ={startdrawing}>test</button> */}
-        {/* <pre className="text-left" >{JSON.stringify(mapLayers, 0, 2)}</pre> */}
+                <StackedBargraph totalMisEnergy={totalMisEnergy} totalMaizEnergy={totalMaizEnergy} totalCatEnergy={totalCatEnergy} totalReedenergy={totalReedenergy} totalMisCarbon={totalMisCarbon} totalMaizCarbon={totalMaizCarbon} totalCatCarbon={totalCatCarbon} totalReedCarbon={totalReedCarbon} />
+            </div>
+            {/* <button onClick ={startdrawing}>test</button> */}
+            {/* <pre className="text-left" >{JSON.stringify(mapLayers, 0, 2)}</pre> */}
         </section>
     );
 }
