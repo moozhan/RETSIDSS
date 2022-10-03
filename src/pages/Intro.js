@@ -26,8 +26,11 @@ function Intro() {
                 <div className="intro-page-grid-item">
                     <img className="image-intro-page" src={tutorial1} alt="Logo" />
                 </div>
+                <div className="intro-page-grid-item">
+                    <img className="image-intro-page" src={tutorial1} alt="Logo" />
+                </div>
             </div>
-            <button><Link to='/dss'>Click me</Link></button>
+            <button className="button-click"><Link className="hyperlinked" to='/dss'>Launch the DSS</Link></button>
         </section>
     );
 }

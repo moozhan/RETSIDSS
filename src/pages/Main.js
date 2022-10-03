@@ -2,10 +2,10 @@ import React, { useState, useContext } from 'react';
 import { MapContainer, TileLayer, LayersControl, GeoJSON, FeatureGroup, LayerGroup } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw";
 import 'leaflet/dist/leaflet.css';
-// import Natuura2000 from '../components/mapLayers/Natuura2000';
+import Natuura2000 from '../components/mapLayers/Natuura2000';
 import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
-import L, { map } from 'leaflet';
+import L from 'leaflet';
 import './main.css';
 import { rooftopenergyStateContext, turbinenergyValueStateContext } from '../Store';
 import miscanthus from '../components/images/Miscanthus.png';
@@ -290,7 +290,7 @@ function TempLocation() {
                                 draw={{ rectangle: false, polyline: false, circle: false, circlemarker: false, marker: false }} />
                         </FeatureGroup>
                         <LayerGroup>
-                            {/* <Natuura2000 /> */}
+                            <Natuura2000 />
                             <LayersControl.Overlay name="Natuura 2000 Buffer">
                                 <FeatureGroup name="buffered">
                                     <GeoJSON

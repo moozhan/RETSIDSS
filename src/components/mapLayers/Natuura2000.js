@@ -1,6 +1,6 @@
 import React from 'react';
 import { LayersControl, GeoJSON, FeatureGroup } from 'react-leaflet';
-import { features } from "../../data/Engbertsdijkvenen.json";
+import { multipleGeojson } from "../../data/Natuurasingle.js";
 
 
 function Natuura2000() {
@@ -14,17 +14,20 @@ function Natuura2000() {
             fillOpacity: 0.5
         });
     });
-    function onEachFeature(feature, layer) {
-        if (feature.properties && feature.properties.SITETYPE) {
-            //layer.bindPopup(feature.properties.SITETYPE);
-            layer.bindTooltip(feature.properties.SITETYPE,
-                { permanent: true, direction: "center", className: "my-label" }
-            ).openTooltip()
-        }
-    }
+    // function onEachFeature(feature, layer) {
+    //     if (feature.properties && feature.properties.SITETYPE) {
+    //         //layer.bindPopup(feature.properties.SITETYPE);
+    //         layer.bindTooltip(feature.properties.SITETYPE,
+    //             { permanent: true, direction: "center", className: "my-label" }
+    //         ).openTooltip()
+    //     }
+    // }
+    console.log(multipleGeojson);
 
 
-    const feature = features.map(feature => {
+    var test = multipleGeojson.features;
+    console.log(test);
+    const feature = test.map(feature => {
         return (feature);
     });
     return (
@@ -34,7 +37,6 @@ function Natuura2000() {
                     <GeoJSON
                         data={feature}
                         style={style}
-                        onEachFeature={onEachFeature}
                     />
                 )}
             </FeatureGroup>
