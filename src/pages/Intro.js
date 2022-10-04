@@ -42,6 +42,11 @@ function Intro() {
                 </div>
                 <div className="intro-page-grid-item">
                     <img className="image-intro-page" src={four} alt="Logo" />
+                    <div className="explanation">
+                        <p>Use the icon on the top right at any time to hide or show elements on the map.</p>
+                        <p>The order of making layers visible would change the order of maps being displayed.</p>
+                        <p>All your created areas are saved in the 'Areas You Planted' layer.</p>
+                    </div>
                 </div>
             </div>
             <button className="button-click"><Link className="hyperlinked" to='/dss'>Launch PLENUM</Link></button>
