@@ -15,7 +15,7 @@ function Intro() {
         <section className="main-section-intro">
             <h1>PLENUM: Paludiculture Decision Support System</h1>
             <div className="container-paragraph">
-                <p>Does implementing energy transition mean abolishing argicultural acitivies? is horticulture a viable solution to overcome the impacts energy transition plans have on argicultural activities? SADSS was designed to help exploring such questions. As a decision support system, SADSS allow you to explore the horticulture implication in your area.  </p>
+                <p>Does implementing energy transition plans mean abolishing argicultural acitivies? iI horticulture a viable solution in overcoming the impacts energy transition plans have on argicultural activities? PLENUM was developed as part of the RETSI project to help exploring such questions. As a decision support system, PLENUM allow you to explore the horticulture implication in your area.  </p>
             </div>
             <div className="intro-page-grid">
                 <div className="intro-page-grid-item">
