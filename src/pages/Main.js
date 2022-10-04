@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import Natuura2000 from '../components/mapLayers/Natuura2000';
 import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
-import L from 'leaflet';
+import L, { map } from 'leaflet';
 import './main.css';
 import { rooftopenergyStateContext, turbinenergyValueStateContext } from '../Store';
 import miscanthus from '../components/images/Miscanthus.png';
@@ -75,6 +75,14 @@ function TempLocation() {
         dashArray: '2',
         fillOpacity: 0.5
     }
+    var Boundary = {
+        fillColor: '#2a5aeb',
+        weight: 4,
+        opacity: 1,
+        color: 'blue',
+        dashArray: '5',
+        fillOpacity: 0
+    }
 
     L.DrawToolbar.include({
         getModeHandlers: function (map) {
@@ -98,6 +106,11 @@ function TempLocation() {
                     enabled: true,
                     handler: new L.Draw.Polygon(map, { shapeOptions: Reed }),
                     title: 'Plant Reed'
+                },
+                {
+                    enabled: true,
+                    handler: new L.Draw.Polygon(map, { shapeOptions: Boundary }),
+                    title: 'Planned Buffer'
                 }
             ];
         }
@@ -144,21 +157,13 @@ function TempLocation() {
                 settotalCarbon(totalCarbon => totalCarbon + carbon);
                 setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Cattail" }]);
                 console.log("blue");
-            } else {
-                console.log("#2e5468");
+            } else if (color === "#2a5aeb") {
+                console.log("#2a5aeb");
                 //var popup = layer.bindPopup(popupContent);
-                let energy = Math.round(262.46 * area);
-                let carbon = Math.round(14.855 * area);
-                setTotalReedArea(totalReedArea => totalReedArea + area);
-                setTotalReedenergy(totalReedenergy => totalReedenergy + energy);
-                setTotalReedCarbon(totalReedCarbon => totalReedCarbon + carbon);
-                settotalEnergy(totalEnergy => totalEnergy + energy);
-                settotalCarbon(totalCarbon => totalCarbon + carbon);
-                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Reed" }]);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Boundary" }]);
             }
         };
         settotalArea(totalArea => totalArea + area);
-
     };
 
 
@@ -253,21 +258,7 @@ function TempLocation() {
     }
 
     //========================== Update Buffer =================//
-    function updateBuffer() {
-        var bufferZone = L.featureGroup().addTo(map);
-        var buffered = buffer(multipleGeojson, bufferValue, { units: 'meters' });
-        var buff = L.geoJson(buffered);
-        buff.addTo(bufferZone);
-        var checked = bufferZone.getLayers().length;
-        console.log(checked);
-        setBufferzone(bufferZone);
-    }
 
-
-    function deleteBuffer() {
-        map.removeLayer(bufferzone);
-
-    }
 
     return (
         <section>
@@ -281,16 +272,7 @@ function TempLocation() {
                                 filter="myFilter"
                             />
                         </LayersControl.BaseLayer>
-                        <FeatureGroup>
-                            <EditControl
-                                position="topleft"
-                                onCreated={_onCreate}
-                                onEdited={_onEdited}
-                                onDeleted={_onDeleted}
-                                draw={{ rectangle: false, polyline: false, circle: false, circlemarker: false, marker: false }} />
-                        </FeatureGroup>
                         <LayerGroup>
-                            <Natuura2000 />
                             <LayersControl.Overlay name="Natuura 2000 Buffer">
                                 <FeatureGroup name="buffered">
                                     <GeoJSON
@@ -299,16 +281,21 @@ function TempLocation() {
                                     />
                                 </FeatureGroup>
                             </LayersControl.Overlay>
+                            <Natuura2000 />
+                            <LayersControl.Overlay name="Areas You Planted">
+                                <FeatureGroup>
+                                    <EditControl
+                                        position="topleft"
+                                        onCreated={_onCreate}
+                                        onEdited={_onEdited}
+                                        onDeleted={_onDeleted}
+                                        draw={{ rectangle: false, polyline: false, circle: false, circlemarker: false, marker: false }} />
+                                </FeatureGroup>
+                            </LayersControl.Overlay>
                         </LayerGroup>
                     </LayersControl>
                 </MapContainer>
             </div>
-            <div className="bufferset">
-                <input type="text" placeholder='Meters' className="buffervalues" onChange={getInputValue} />
-                <button onClick={updateBuffer} className="buffercreation">Create Buffer</button>
-            </div>
-
-            <button className="bufferdel" onClick={deleteBuffer}>delete buffer</button>
 
             <div className="chartholder">
                 <Bargraph totalMisArea={totalMisArea} totalMaizArea={totalMaizArea} totalCatArea={totalCatArea} totalReedArea={totalReedArea} />

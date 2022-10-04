@@ -274,7 +274,7 @@ section .mainPage {
   z-index: 50000;
   margin-left: 0.8em;
   position: absolute;
-  margin-top: -33em;
+  margin-top: -55em;
   width: 60px;
   height: 60px;
   text-align: center;
@@ -282,7 +282,9 @@ section .mainPage {
 .buffervalues {
   width: 62px;
   height: 30px;
+  font-size: 10px;
 }
+
 
 .buffercreation {
   background-color: white;
@@ -344,6 +346,19 @@ section .mainPage {
   height: 80px;
 }
 
+.leaflet-touch
+  .leaflet-draw-toolbar
+  .leaflet-draw-draw-polygon[title="Planned Buffer"] {
+  background: url("../components/images/boundary.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: scale(0.8);
+  width: 60px;
+  height: 80px;
+}
+
+
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
   background: url("https://www.seekpng.com/png/detail/860-8608502_thin-recycle-bin-delete-garbage-full-comments-bin.png");
   background-repeat: no-repeat;
@@ -365,6 +380,7 @@ section .mainPage {
   width: 60px;
   height: 70px;
 }
+
 
 .bufferzone {
   width: 40vw;
@@ -424,9 +440,9 @@ section .mainPage {
   z-index: 50000;
   background-color: white;
   border: 1px solid gray;
-  margin-left: 0.9em;
-  position: absolute;
-  margin-top: -33em;
+  /* margin-left: 0.8em; */
+  position: relative;
+  /* margin-top: -60em; */
   width: 63px;
   height: 60px;
   text-align: center;
