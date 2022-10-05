@@ -29,7 +29,8 @@ function Intro() {
                 <div className="intro-page-grid-item">
                     <img className="image-intro-page" src={two} alt="Logo" />
                     <div className="explanation">
-                        <p>Choose a plant to crop from the left menue</p>
+                        <p>Activate the 'Areas You Planted' layer from the menu on the top right.</p>
+                        <p>Choose a plant to crop from the left menu</p>
                         <p>Draw polygons on the map. If the polygon is not complete the system will automatically complete it by joining the first and the last added points.</p>
                     </div>
                 </div>
@@ -49,7 +50,7 @@ function Intro() {
                     </div>
                 </div>
             </div>
-            <button className="button-click"><Link className="hyperlinked" to='/dss'>Launch PLENUM</Link></button>
+            <Link className="hyperlinked" to='/dss'><button className="button-click">Launch PLENUM</button></Link>
         </section>
     );
 }
