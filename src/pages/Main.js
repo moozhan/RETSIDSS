@@ -157,6 +157,17 @@ function TempLocation() {
                 settotalCarbon(totalCarbon => totalCarbon + carbon);
                 setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Cattail" }]);
                 console.log("blue");
+            } else if (color === "#2e5468") {
+                //var popup = layer.bindPopup(popupContent);
+                let energy = Math.round(262.46 * area);
+                let carbon = Math.round(14.855 * area);
+                setTotalReedArea(totalReedArea => totalReedArea + area);
+                setTotalReedenergy(totalReedEnergy => totalReedEnergy + energy);
+                setTotalReedCarbon(totalReedCarbon => totalReedCarbon + carbon);
+                settotalEnergy(totalEnergy => totalEnergy + energy);
+                settotalCarbon(totalCarbon => totalCarbon + carbon);
+                setMapLayers(layers => [...layers, { id: _leaflet_id, latLngs: layer.getLatLngs()[0], area: area, type: "Reed" }]);
+                console.log("blue");
             } else if (color === "#2a5aeb") {
                 console.log("#2a5aeb");
                 //var popup = layer.bindPopup(popupContent);
@@ -219,6 +230,10 @@ function TempLocation() {
                 let energy = Math.round(262.46 * area);
                 let carbon = Math.round(14.855 * area);
                 setTotalReedArea(totalReedArea => totalReedArea - area);
+                console.log(totalReedArea);
+                console.log(totalReedCarbon);
+                console.log(totalEnergy);
+
                 setTotalReedenergy(totalReedenergy => totalReedenergy - energy);
                 setTotalReedCarbon(totalReedCarbon => totalReedCarbon - carbon);
                 settotalEnergy(totalEnergy => totalEnergy - energy);
