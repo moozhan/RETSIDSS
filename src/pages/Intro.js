@@ -1,6 +1,4 @@
-import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import tutorial1 from '../components/images/tutorial1.jpg';
 import one from '../components/images/1.gif';
 import two from '../components/images/2.gif';
 import three from '../components/images/3.gif';
