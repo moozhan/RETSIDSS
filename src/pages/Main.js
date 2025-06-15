@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import Natuura2000 from '../components/mapLayers/Natuura2000';
 import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
-import L, { map } from 'leaflet';
+import L from 'leaflet';
 import './main.css';
 import miscanthus from '../components/images/Miscanthus.png';
 import maze from '../components/images/maze.png';
@@ -21,7 +21,7 @@ function TempLocation() {
     const [totalMaizArea, setTotalMaizArea] = useState(0);
     const [totalCatArea, setTotalCatArea] = useState(0);
     const [totalReedArea, setTotalReedArea] = useState(0);
-    const [totalArea, settotalArea] = useState(0);
+    const [settotalArea] = useState(0);
     const [totalMisEnergy, setTotalMisEnergy] = useState(0);
     const [totalMaizEnergy, setTotalMaizEnergy] = useState(0);
     const [totalCatEnergy, setTotalCatenergy] = useState(0);
@@ -33,7 +33,7 @@ function TempLocation() {
     const [totalReedCarbon, setTotalReedCarbon] = useState(0);
     const [settotalCarbon] = useState(0);
     const [setMap] = useState(0);
-    const [bufferValue, setBufferValue] = useState(0);
+    // const [bufferValue, setBufferValue] = useState(0);
     const [setDraggable] = useState(false);
     // const [hidden, setHidden] = useState(false);
     // const [bufferzone, setBufferzone] = useState();
@@ -189,7 +189,7 @@ function TempLocation() {
 
     const _onDeleted = (e) => {
         const { layers: { _layers } } = e;
-        Object.values(_layers).map((a) => {
+        Object.values(_layers).forEach((a) => {
             var areameter = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
             var area = areameter / 10000;
             var color = a.options.fillColor;
@@ -246,7 +246,7 @@ function TempLocation() {
 
     //total area
     //=========================================================
-    const infrastructures = mapLayers.length;
+    // const infrastructures = mapLayers.length;
 
 
     let myFilter = [
@@ -323,25 +323,25 @@ function TempLocation() {
                             <th className="middle">CO2 Reduction (Kg/hectare/year)</th>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" alt="image" src={miscanthus}></img></span></td>
+                            <td><span> <img className="smallimage" alt="Miscanthus" src={miscanthus}></img></span></td>
                             <td>Miscanthus</td>
                             <td className="centered">239.59</td>
                             <td className="centered">13560.9</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" alt="image" src={maze}></img></span></td>
+                            <td><span> <img className="smallimage" alt="Maize" src={maze}></img></span></td>
                             <td>Maize</td>
                             <td className="centered">520.38</td>
                             <td className="centered">29453.3</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" alt="image" src={cattail}></img></span></td>
+                            <td><span> <img className="smallimage" alt="Cattail" src={cattail}></img></span></td>
                             <td>Cattail</td>
                             <td className="centered">128.32</td>
                             <td className="centered">7262.9</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" alt="image" src={reed}></img></span></td>
+                            <td><span> <img className="smallimage" alt="Reed" src={reed}></img></span></td>
                             <td>Reed</td>
                             <td className="centered">262.46</td>
                             <td className="centered">14855</td>
