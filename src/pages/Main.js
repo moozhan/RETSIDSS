@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, LayersControl, GeoJSON, FeatureGroup, LayerGroup } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw";
 import 'leaflet/dist/leaflet.css';
@@ -7,7 +7,6 @@ import { multipleGeojson } from "../data/Natuurasingle";
 import "leaflet-draw/dist/leaflet.draw.css";
 import L, { map } from 'leaflet';
 import './main.css';
-import { rooftopenergyStateContext, turbinenergyValueStateContext } from '../Store';
 import miscanthus from '../components/images/Miscanthus.png';
 import maze from '../components/images/maze.png';
 import cattail from '../components/images/cattail.png';
@@ -32,12 +31,12 @@ function TempLocation() {
     const [totalMaizCarbon, setTotalMaizCarbon] = useState(0);
     const [totalCatCarbon, setTotalCatCarbon] = useState(0);
     const [totalReedCarbon, setTotalReedCarbon] = useState(0);
-    const [totalCarbon, settotalCarbon] = useState(0);
-    const [map, setMap] = useState(0);
+    const [settotalCarbon] = useState(0);
+    const [setMap] = useState(0);
     const [bufferValue, setBufferValue] = useState(0);
-    const [draggable, setDraggable] = useState(false);
-    const [hidden, setHidden] = useState(false);
-    const [bufferzone, setBufferzone] = useState();
+    const [setDraggable] = useState(false);
+    // const [hidden, setHidden] = useState(false);
+    // const [bufferzone, setBufferzone] = useState();
 
     // Buffer =====================//
     var buffered = buffer(multipleGeojson, 100, { units: 'meters' });
@@ -180,9 +179,9 @@ function TempLocation() {
 
     const _onEdited = e => {
         const { layers: { _layers } } = e;
-        Object.values(_layers).map((a) => {
-            var color = a.options.fillColor;
-            var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
+        Object.values(_layers).forEach((a) => {
+            // var color = a.options.fillColor;
+            // var area = L.GeometryUtil.geodesicArea(a.getLatLngs()[0]);
             setMapLayers(layers => layers.map(l => l.id === a._leaflet_id ? { ...l, latlngs: { ...a.editing.latlngs[0] } } : l));
         });
     };
@@ -266,11 +265,11 @@ function TempLocation() {
 
 
     //=======================Form =====================//
-    const getInputValue = (event) => {
-        const userValue = event.target.value;
-        setBufferValue(userValue);
-        console.log(bufferValue);
-    }
+    // const getInputValue = (event) => {
+    //     const userValue = event.target.value;
+    //     setBufferValue(userValue);
+    //     console.log(bufferValue);
+    // }
 
     //========================== Update Buffer =================//
 
@@ -324,25 +323,25 @@ function TempLocation() {
                             <th className="middle">CO2 Reduction (Kg/hectare/year)</th>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" src={miscanthus}></img></span></td>
+                            <td><span> <img className="smallimage" alt="image" src={miscanthus}></img></span></td>
                             <td>Miscanthus</td>
                             <td className="centered">239.59</td>
                             <td className="centered">13560.9</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" src={maze}></img></span></td>
+                            <td><span> <img className="smallimage" alt="image" src={maze}></img></span></td>
                             <td>Maize</td>
                             <td className="centered">520.38</td>
                             <td className="centered">29453.3</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" src={cattail}></img></span></td>
+                            <td><span> <img className="smallimage" alt="image" src={cattail}></img></span></td>
                             <td>Cattail</td>
                             <td className="centered">128.32</td>
                             <td className="centered">7262.9</td>
                         </tr>
                         <tr>
-                            <td><span> <img className="smallimage" src={reed}></img></span></td>
+                            <td><span> <img className="smallimage" alt="image" src={reed}></img></span></td>
                             <td>Reed</td>
                             <td className="centered">262.46</td>
                             <td className="centered">14855</td>
