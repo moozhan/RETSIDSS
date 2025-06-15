@@ -16,7 +16,7 @@ import Bargraph from '../components/mapdetails/Graph';
 import StackedBargraph from '../components/mapdetails/StackedGraph';
 
 function TempLocation() {
-    const [mapLayers, setMapLayers] = useState([]);
+    const [setMapLayers] = useState([]);
     const [totalMisArea, setTotalMisArea] = useState(0);
     const [totalMaizArea, setTotalMaizArea] = useState(0);
     const [totalCatArea, setTotalCatArea] = useState(0);
@@ -249,9 +249,9 @@ function TempLocation() {
     // const infrastructures = mapLayers.length;
 
 
-    let myFilter = [
-        'grayscale: 40%',
-    ];
+    // let myFilter = [
+    //     'grayscale: 40%',
+    // ];
 
     //Marker Setup
     //==============================================================================================
